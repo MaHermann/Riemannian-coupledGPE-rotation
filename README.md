@@ -8,4 +8,4 @@ To reproduce the experiments, you need to run `experiments/harmonic_trap.jl` for
 
 ## Environment
 
-You should run the experiments and evaluations in the provided package environment, i.e., first run `using Pkg; Pkg.activate("./Riemannian-coupledGPE-rotation/"); Pkg.instantiate();` inside julia, and when calling the files, use the `--project` flag, e.g. `julia --project=Riemannian-coupledGPE-rotation/ experiments/harmonic_trap.jl`.
+You should run the experiments and evaluations in the provided package environment, i.e., first run `using Pkg; Pkg.activate("./Riemannian-coupledGPE-rotation/"); Pkg.instantiate();` inside julia, and when calling the files, use the `--project` flag, e.g. `julia --project=. experiments/harmonic_trap.jl`.

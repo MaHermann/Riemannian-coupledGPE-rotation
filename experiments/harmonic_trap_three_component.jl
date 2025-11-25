@@ -42,7 +42,7 @@ end
     reference_path          = nothing#"path/to/experiment"
 end
 ##
-results_folder = "path/to/outputfolder"
+results_folder = "path/to/outputfolder/"
 filename = "3_component_LgrRGD_095_Adaptive_" * format(now(), "yyyy-mm-dd_HHMMSS")
 ## Setup logging
 n = get_n_dofs(dimension, n_elements, interp_degree, type)
