@@ -20,7 +20,7 @@ function get_gpe_system(experiment)
     )
 end
 ##
-experiment_path = "experiments/results/weak_Lgr_095_2025-11-17_104654"
+experiment_path = "path/to/experiment"
 ##
 experiment = load_experiment(experiment_path)
 gpe_system = get_gpe_system(experiment)

@@ -10,17 +10,9 @@ function ConstantPotential(potential_function, grid_context::GridContext)
     return ConstantPotential(potential_function, weighted_mass_matrix)
 end
 
-function add_potentials(potential1::ConstantPotential, potential2::ConstantPotential)
-    return ConstantPotential(
-        x -> (potential1.potential_function(x) + potential2.potential_function(x)),
-        potential1.weighted_mass_matrix .+ potential2.weighted_mass_matrix,
-    )
-end
-
 function matrix_representation(potential::ConstantPotential, _::Number)
     return potential.weighted_mass_matrix
 end
-
 
 struct ComponentwisePotential{T} <: Potential
     potential_functions
@@ -37,27 +29,6 @@ end
 
 function matrix_representation(potential::ComponentwisePotential, i::Number)
     return potential.weighted_mass_matrices[i]
-end
-
-function create_potential_function_from_points_1D(xs, values)  #assumes equal spacing
-    xs = deepcopy(xs)
-    values = deepcopy(values)
-    a,b = xs[1], xs[end]
-    ε = xs[2] - xs[1]
-    function V(x)
-        if x[1] <= a
-            return values[1]
-        elseif x[1] >= b
-            return values[end]
-        else
-            return values[floor(Int, (x[1]-a)/ε) + 1]
-        end
-    end
-    return V
-end
-
-function rescale_potential_function(V, scale, shift)
-    return x -> V((x[1] - shift)/scale)
 end
 
 function plot_potential_2D(

@@ -5,7 +5,6 @@ function is_met(criterion::NoCriterion, ϕ, gpe_system; kwargs...)
     return false
 end
 
-
 struct AbsoluteCriterion <: TerminationCriterion
     quantityOfInterest
     threshold::Number

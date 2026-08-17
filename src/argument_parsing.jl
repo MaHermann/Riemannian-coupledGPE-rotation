@@ -50,11 +50,11 @@ function get_termination_criterion(arguments)
     end
 end
 
-function get_solver(arguments)
+function get_solver(arguments, p)
     if :solver in keys(arguments)
         return arguments[:solver]
     else
-        return get_default_solver()
+        return get_default_solver(p)
     end
 end
 

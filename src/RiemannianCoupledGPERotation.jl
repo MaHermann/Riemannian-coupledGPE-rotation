@@ -19,10 +19,7 @@ export GridContext, generate_grid_context, grid_points, get_n_dofs
 
 export VariableStorage
 
-export gradient_descent_energy_adaptive,
-        alternating_gradient_descent_energy_adaptive,
-        gradient_descent_Lagrangian,
-        alternating_gradient_descent_Lagrangian
+export gradient_descent_energy_adaptive, gradient_descent_Lagrangian
 
 export GPESystem
 
@@ -30,16 +27,13 @@ export AbsoluteCriterion, SumResidual
 
 export gradient_energy_adaptive, gradient_Lagrangian
 
-export project_energy_adaptive, metric_energy_adaptive, normalization_retraction!
+export normalization_retraction!
 
 export ConstantStepSize, Adaptive, LineSearch, reset!
 
-export PFrame, density, plot_PFrame, plot_PFrame!
+export PFrame, density, plot_PFrame
 
-export ConstantPotential, ComponentwisePotential, create_periodic_potential_2D,
-        add_potentials, create_random_checkerboard_potential_2D,
-        plot_potential_1D, plot_potential_1D!, plot_potential_2D,
-        plot_potential_2D!
+export ConstantPotential, ComponentwisePotential,plot_potential_2D, plot_potential_2D!
 
 export energy, residuals, residuals!, random_normed_PFrame, constant_normed_PFrame
 

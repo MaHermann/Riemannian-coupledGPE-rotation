@@ -1,7 +1,7 @@
 function gradient!(
     gradient::PFrame{p}, ϕ::PFrame{p}, gpe_system, gradient_componentwise!;
     solver = nothing, variable_storage = nothing, update_gpe_system = true,
-    kwargs...
+    kwargs...,
 ) where {p}
     isnothing(solver) && (solver = get_default_solver(p))
     isnothing(variable_storage) && (variable_storage = VariableStorage(ϕ))
@@ -69,8 +69,6 @@ function gradient_energy_adaptive_componentwise!(
 )
     n = size(ϕᵢ, 1)
     a(y, x) = mul_hamiltonian!(y, x, gpe_system, i)
-    # TODO Check again whats happening here with eltype and if we may need to treat
-    # this as an r-linear map
     A = LinearMap{eltype(ϕᵢ)}(a, n, issymmetric = false, ismutating = true)
 
     Mϕ = get_Mϕ!(variable_storage, ϕᵢ, gpe_system, i)
@@ -82,7 +80,7 @@ function gradient_energy_adaptive_componentwise!(
         apply!(u, gpe_system.grid_context.constraint_handler)
     end
 
-    # compute the relative tolerance in dependence of the residual
+    # compute the relative tolerance depending of the residual
     abstol_old = solver.abstol
     reltol_old = solver.reltol
     r = get_r!(variable_storage, ϕᵢ, gpe_system, i)
@@ -132,7 +130,7 @@ function gradient_Lagrangian_componentwise!(
     end
     G_ω_real = LinearMap(g_ω_real, size(u, 1)*2, issymmetric = false, ismutating = true)
     
-    # compute the relative tolerance in dependence of the residual
+    # compute the relative tolerance depending of the residual
     abstol_old = solver.abstol
     reltol_old = solver.reltol
     r = get_r!(variable_storage, ϕᵢ, gpe_system, i)
@@ -146,6 +144,9 @@ function gradient_Lagrangian_componentwise!(
     if !isnothing(gpe_system.grid_context.constraint_handler)
         apply!(u, gpe_system.grid_context.constraint_handler)
     end
+
+    # as we use R as a temp memory, we have to invalidate it
+    variable_storage.R_isValid[i] = false
 
     # renaming for clarity
     v = R

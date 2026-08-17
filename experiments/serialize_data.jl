@@ -22,14 +22,14 @@ function get_gpe_system(experiment)
 end
 ##
 experiment_path = "path/to/experiment"
-output_path = "path/to/outputfolder"
+output_path = "path/to/outputfolder/"
 parameter = "residuals"
-filename = parameter * "_3_component_LgrRGD_095_Adaptive"
+filename = parameter * "filename"
 experiment = load_experiment(experiment_path);
 smoothing = false
 window_size = 100
 moving_average(vs,n) = [mean(@view vs[max(1,i-n):min(length(vs),i+n)]) for i in 1:length(vs)]
-every_n = 100
+every_n = 50
 ##
 file = open(output_path * filename * ".txt", "w")
 if parameter == "residuals"

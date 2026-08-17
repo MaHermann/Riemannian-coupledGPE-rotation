@@ -24,26 +24,26 @@ params = Dict([])
 end
 ## Numerical parameters
 @parameters params begin
-    n_elements              = 2^6     # per direction
+    n_elements              = 2^6    # per direction
     interp_degree           = 2
     quad_degree             = 5
-    step_size               = Adaptive(n_components)#1#LineSearch
+    step_size               = 1 #Adaptive(n_components)#LineSearch
     step_size_range         = 0.1:0.1:10
-    ω                       = 0.95
+    ω                       = 0.8
     type                    = Ferrite.Quadrilateral
-    optimization_algorithm  = gradient_descent_Lagrangian
+    optimization_algorithm  = gradient_descent_energy_adaptive #gradient_descent_Lagrangian
     solver_reltol           = 1e-1
     solver_max_iter         = nothing
     start_value             = :constant
     start_residual          = 1e-2
     termination_residual    = 1e-14
     max_iter                = 100_000
-    initialization_max_iter = 3_000
-    reference_path          = nothing#"path/to/experiment"
+    initialization_max_iter = 1_000
+    reference_path          = nothing #"path/to/experiment" #use this for contraction rates
 end
 ##
 results_folder = "path/to/outputfolder/"
-filename = "3_component_LgrRGD_095_Adaptive_" * format(now(), "yyyy-mm-dd_HHMMSS")
+filename = "filename" * format(now(), "yyyy-mm-dd_HHMMSS")
 ## Setup logging
 n = get_n_dofs(dimension, n_elements, interp_degree, type)
 grid_context = generate_grid_context(
